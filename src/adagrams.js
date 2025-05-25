@@ -47,6 +47,16 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const freqMap = lettersWithFreq(lettersInHand);
+  for (let letter of input){
+    letter = letter.toLowerCase();
+    if(freqMap[letter] != null && freqMap[letter] > 0) {
+      freqMap[letter] = freqMap[letter]-1
+    } else{
+      return false
+    }
+  }
+  return true
 };
 
 export const scoreWord = (word) => {
@@ -56,3 +66,12 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+const lettersWithFreq = (lettersInHand) =>{
+  let freqMap = {};
+  for (let letter of lettersInHand){
+    letter = letter.toLowerCase();
+    freqMap[letter] = (freqMap[letter] || 0) +1 
+  }
+  return freqMap;
+}
