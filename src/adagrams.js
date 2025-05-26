@@ -84,6 +84,23 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let winningWord = '';
+  let winningScore = 0;
+
+  for (let word of words) {
+    const currScore = scoreWord(word);
+
+    if (currScore > winningScore) {
+      winningScore = currScore;
+      winningWord = word;
+    } else if (currScore === winningScore) {
+      if (winningWord.length !== 10 && (word.length === 10 || word.length < winningWord.length)) {
+        winningWord = word;
+      }
+    }
+  }
+
+  return { word: winningWord, score: winningScore };
 };
 
 const lettersWithFreq = (lettersInHand) =>{
